@@ -18,7 +18,7 @@ jobs:
           username: salman
           password: Namlas@786
           port: 22
-          run: |
+          script: |
            cd ~/my-node-app && git pull origin main && npm install && node index.js
       
 
