@@ -19,6 +19,6 @@ jobs:
           password: Namlas@786
           port: 22
           run: |
-           cd ~/my-node-app && git init && git remote add origin git@github.com:user/repo.git && git pull origin main && npm install && pm2 restart your-app
+           cd ~/my-node-app && git pull origin main && npm install && node index.js
       
 
