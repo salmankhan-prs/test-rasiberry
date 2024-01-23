@@ -19,6 +19,13 @@ jobs:
           password: Namlas@786
           port: 22
           script: |
-           cd ~/my-node-app && git pull origin main && npm install && node index.js
+            # Identify the existing Node.js process and kill it
+            existing_pid=$(lsof -i :4000 -t)
+            if [ -n "$existing_pid" ]; then
+            echo "Stopping existing Node.js server with PID $existing_pid"
+            kill -9 "$existing_pid"
+            fi
+
+            cd ~/my-node-app && git pull origin main && npm install && node index.js
       
 
