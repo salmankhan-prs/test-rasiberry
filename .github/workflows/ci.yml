@@ -6,15 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
-   
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout main branch
+      - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          ref: main
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -24,6 +21,17 @@ jobs:
       - name: Install npm dependencies
         run: npm install
 
+      - name: Run tests
+        run: npm test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
       - name: Deploy to Raspberry Pi and start server
         run: |
-          ssh  -o StrictHostKeyChecking=no salman@59.182.0.211 'cd ~/my-node-app && git pull origin main && npm install && node index.js'
+          echo "Namlas@786" | sshpass -p - ssh salman@59.182.0.211 'cd ~/my-node-app && git pull origin main && npm install && node index.js'
