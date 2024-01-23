@@ -26,4 +26,4 @@ jobs:
 
       - name: Deploy to Raspberry Pi and start server
         run: |
-          ssh salman@59.182.0.211 'cd ~/my-node-app && git pull origin main && npm install && node index.js'
+          ssh  -o StrictHostKeyChecking=no salman@59.182.0.211 'cd ~/my-node-app && git pull origin main && npm install && node index.js'
