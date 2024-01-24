@@ -14,6 +14,10 @@ jobs:
       - name: SSH and run commands
         uses: appleboy/ssh-action@v1.0.3
         with:
+          
+          echo "Host: ${{ secrets.HOST }}"
+          echo "Username: ${{ secrets.USERNAME }}"
+          echo "Password: ${{ secrets.PASSWORD }}"
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
