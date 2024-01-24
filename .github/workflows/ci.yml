@@ -18,6 +18,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
+          run: |
+            echo "Host: ${{ secrets.HOST }}"
+            echo "Username: ${{ secrets.USERNAME }}"
+            echo "Password: ${{ secrets.PASSWORD }}"
+
           script: |
             echo "Host: ${{ secrets.HOST }}"
             echo "Username: ${{ secrets.USERNAME }}"
