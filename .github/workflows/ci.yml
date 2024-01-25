@@ -18,17 +18,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 22
-          run: |
-            echo "Host: ${{ secrets.HOST }}"
-            echo "Username: ${{ secrets.USERNAME }}"
-            echo "Password: ${{ secrets.PASSWORD }}"
-
+          
           script: |
-            echo "Host: ${{ secrets.HOST }}"
-            echo "Username: ${{ secrets.USERNAME }}"
-            echo "Password: ${{ secrets.PASSWORD }}"
-    
-    
             # Identify the existing Node.js process and kill it
             existing_pid=$(lsof -i :4000 -t)
             if [ -n "$existing_pid" ]; then
@@ -36,6 +27,6 @@ jobs:
             kill -9 "$existing_pid"
             fi
 
-            cd ~/my-node-app && git pull origin main && npm install && node index.js
+            cd ~/my-node-app && git stash && git pull origin main && npm install && node index.js
       
 
