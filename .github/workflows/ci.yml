@@ -49,8 +49,8 @@ jobs:
             aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 569496106099.dkr.ecr.us-east-1.amazonaws.com
 
             # Identify the existing Docker container and stop/remove it
-            sudo docker stop test-rasibery || true
-            sudo docker rm test-rasibery || true
+            # sudo docker stop test-rasibery || true
+            # sudo docker rm test-rasibery || true
 
             # Pull the latest Docker image from the ECR registry
             sudo docker pull 569496106099.dkr.ecr.us-east-1.amazonaws.com/test-rasibery
