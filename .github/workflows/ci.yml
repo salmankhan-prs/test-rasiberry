@@ -32,7 +32,7 @@ jobs:
         run: |
           docker buildx create --use
           docker buildx build --platform linux/arm64 -t $ECR_REGISTRY/$ECR_REPOSITORY --push  .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+          # docker push $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: SSH and run commands
         uses: appleboy/ssh-action@v1.0.3
