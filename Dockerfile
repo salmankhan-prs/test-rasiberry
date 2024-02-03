@@ -1,4 +1,5 @@
-FROM node:latest
+FROM arm64v8/node:latest
+
 ARG WORK_DIR=/var/www/node
 WORKDIR ${WORK_DIR}
 
