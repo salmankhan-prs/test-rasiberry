@@ -22,28 +22,28 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build, tag, and push image to Amazon ECR
-        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-          docker build -f Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: SSH and run commands
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: 22
-          script: |
-            # Identify the existing Node.js process and kill it
-            existing_pid=$(lsof -i :4000 -t)
-            if [ -n "$existing_pid" ]; then
-              echo "Stopping existing Node.js server with PID $existing_pid"
-              kill -9 "$existing_pid"
-            fi
 
-            cd ~/my-node-app && git stash && rm -rf node_modules && rm -rf package-lock.json && git pull origin main && npm install && node index.js
+      # - name: SSH and run commands
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: 22
+      #     script: |
+      #       # Identify the existing Node.js process and kill it
+      #       existing_pid=$(lsof -i :4000 -t)
+      #       if [ -n "$existing_pid" ]; then
+      #         echo "Stopping existing Node.js server with PID $existing_pid"
+      #         kill -9 "$existing_pid"
+      #       fi
+
+      #       cd ~/my-node-app && git stash && rm -rf node_modules && rm -rf package-lock.json && git pull origin main && npm install && node index.js
