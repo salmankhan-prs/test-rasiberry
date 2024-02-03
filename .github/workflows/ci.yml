@@ -28,7 +28,7 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-          docker build  -f ./Dockerfile
+          docker build -f ./Dockerfile .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: SSH and run commands
