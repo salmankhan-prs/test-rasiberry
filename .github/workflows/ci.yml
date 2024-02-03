@@ -46,11 +46,11 @@ jobs:
           port: 22
           script: |
             # Identify the existing Docker container and stop/remove it
-            docker stop $ECR_REPOSITORY || true
-            docker rm $ECR_REPOSITORY || true
+            docker stop test-rasibery || true
+            docker rm test-rasibery || true
 
             # Pull the latest Docker image from the ECR registry
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY
+            docker pull 569496106099.dkr.ecr.us-east-1.amazonaws.com/test-rasibery
 
             # Run the Docker container on Raspberry Pi
-            docker run -d --name your-node-app -p 4000:4000 $ECR_REGISTRY/$ECR_REPOSITORY
+            docker run -d --name your-node-app -p 4000:4000 569496106099.dkr.ecr.us-east-1.amazonaws.com/test-rasibery
