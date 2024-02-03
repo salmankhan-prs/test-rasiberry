@@ -35,19 +35,29 @@ jobs:
 
 
 
-      # - name: SSH and run commands
-      #   uses: appleboy/ssh-action@v1.0.3
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     port: 22
-      #     script: |
-      #       # Identify the existing Node.js process and kill it
-      #       existing_pid=$(lsof -i :4000 -t)
-      #       if [ -n "$existing_pid" ]; then
-      #         echo "Stopping existing Node.js server with PID $existing_pid"
-      #         kill -9 "$existing_pid"
-      #       fi
+      - name: SSH and run commands
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: |
+            # Identify the existing Docker container and stop/remove it
+            docker stop $ECR_REPOSITORY || true
+            docker rm $ECR_REPOSITORY || true
 
-      #       cd ~/my-node-app && git stash && rm -rf node_modules && rm -rf package-lock.json && git pull origin main && npm install && node index.js
+            # Pull the latest Docker image from the registry
+            docker pull ECR_REGISTRY/$ECR_REPOSITORY
+
+             # Run the Docker container
+            docker run -d --name your-node-app -p 4000:4000 ECR_REGISTRY/$ECR_REPOSITORY
+
+            # # Identify the existing Node.js process and kill it
+            # existing_pid=$(lsof -i :4000 -t)
+            # if [ -n "$existing_pid" ]; then
+            #   echo "Stopping existing Node.js server with PID $existing_pid"
+            #   kill -9 "$existing_pid"
+            # fi
+
+            # cd ~/my-node-app && git stash && rm -rf node_modules && rm -rf package-lock.json && git pull origin main && npm install && node index.js
