@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:latest
 ARG WORK_DIR=/var/www/node
 WORKDIR ${WORK_DIR}
 
