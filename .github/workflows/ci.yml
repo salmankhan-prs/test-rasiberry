@@ -30,8 +30,8 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-         docker build -t $ECR_REGISTRY/test-rasibery .
-         docker push  $ECR_REGISTRY/test-rasibery
+         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
+         docker push  $ECR_REGISTRY/$ECR_REPOSITORY
 
 
 
