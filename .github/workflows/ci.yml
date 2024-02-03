@@ -28,10 +28,8 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-          cd $GITHUB_WORKSPACE 
-          echo $ECR_REPOSITORY
-          docker build . 
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: SSH and run commands
         uses: appleboy/ssh-action@v1.0.3
