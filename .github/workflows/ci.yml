@@ -28,8 +28,8 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-          cd $GITHUB_WORKSPACE
-          docker build -f ./Dockerfile .
+
+          docker build .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: SSH and run commands
