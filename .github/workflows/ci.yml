@@ -36,8 +36,9 @@ jobs:
       - name: SSH and run commands
         uses: appleboy/ssh-action@v1.0.3
         env:
-          ECR_REGISTRY: $ECR_REGISTRY
-          ECR_REPOSITORY: $ECR_REPOSITORY
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
+
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
