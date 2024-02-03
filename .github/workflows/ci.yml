@@ -28,7 +28,7 @@ jobs:
           ECR_REPOSITORY: ${{secrets.REPO_NAME}}
           IMAGE_TAG: test
         run: |
-          cd ~/test-rasiberry
+          cd $GITHUB_WORKSPACE 
           echo $ECR_REPOSITORY
           docker build . 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
