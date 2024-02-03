@@ -29,7 +29,6 @@ jobs:
           IMAGE_TAG: test
         run: |
           echo $ECR_REPOSITORY
-          cd $GITHUB_WORKSPACE
           docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
 
