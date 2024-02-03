@@ -30,7 +30,7 @@ jobs:
         run: |
           echo $ECR_REPOSITORY
           cd $GITHUB_WORKSPACE
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY .
+          docker build . -t $ECR_REGISTRY/$ECR_REPOSITORY
           docker push $ECR_REGISTRY/$ECR_REPOSITORY
 
       - name: SSH and run commands
